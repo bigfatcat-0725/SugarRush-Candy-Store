@@ -1,14 +1,54 @@
 <script>
+	import supabase from '$lib/db'
+	import { user } from '$lib/stores'
+	import { goto } from '$app/navigation'
+
 	let name,
 		phone,
 		email,
 		password,
 		confirmPassword = ''
 
-	const signUp = () => {}
+	const signUp = async () => {
+		if (password === confirmPassword) {
+			let {
+				user: userDetails,
+				session,
+				error
+			} = await supabase.auth.signUp(
+				{
+					email: email,
+					password: password
+				},
+				{
+					data: {
+						name: name,
+						phone: phone
+					}
+				}
+			)
+			$user = userDetails
+			goto('/home')
+		} else {
+			alert('confirm password!')
+		}
+	}
 </script>
 
 <div class="sign">
+	<a href="/">
+		<svg
+			class="back"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="#C8C8C8"
+			></path>
+		</svg>
+	</a>
 	<span class="Create-Account"> Create Account </span>
 	<span class="Please-fill-the-input-below-here"> Please fill the input below here. </span>
 
@@ -28,7 +68,12 @@
 				</svg>
 			</div>
 			<div class="content">
-				<input bind:value="{name}" required placeholder="Full Name" type="text" />
+				<input
+					bind:value="{name}"
+					placeholder="Full Name"
+					type="text"
+					autocomplete="new-password"
+				/>
 			</div>
 		</div>
 		<div class="Rectangle phone">
@@ -46,7 +91,7 @@
 				</svg>
 			</div>
 			<div class="content">
-				<input bind:value="{phone}" required placeholder="Phone" type="number" />
+				<input bind:value="{phone}" placeholder="Phone" type="text" autocomplete="new-password" />
 			</div>
 		</div>
 		<div class="Rectangle email">
@@ -151,6 +196,7 @@
 		<a href="/login"><span class="Login">Login</span></a>
 	</div>
 
+	<div class="line"></div>
 	<div class="Or-connect-with">
 		<svg
 			width="206"
@@ -205,6 +251,13 @@
 		height: 100vh;
 		position: relative;
 		background-color: #383838;
+	}
+	.back {
+		position: absolute;
+		top: 3%;
+		left: 3%;
+		width: 30px;
+		height: 30px;
 	}
 
 	.Create-Account {
@@ -356,6 +409,16 @@
 		color: #c46969;
 	}
 
+	.line {
+		width: 250px;
+		height: 1px;
+		background-color: gray;
+		position: absolute;
+		top: 93%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+	}
 	.Or-connect-with {
 		position: absolute;
 		top: 90%;

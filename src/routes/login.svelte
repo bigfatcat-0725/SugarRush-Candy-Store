@@ -593,9 +593,10 @@
 
 	<div class="sign">
 		<span class="Dont-have-an-account"> Don’t have an account? </span>
-		<span class="Sign-Up"> Sign Up </span>
+		<a href="/sign"><span class="Sign-Up"> Sign Up </span></a>
 	</div>
 
+	<div class="line"></div>
 	<div class="Or-connect-with">
 		<svg
 			width="206"
@@ -857,6 +858,16 @@
 		color: #d87070;
 	}
 
+	.line {
+		width: 250px;
+		height: 1px;
+		background-color: gray;
+		position: absolute;
+		top: 93%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+	}
 	.Or-connect-with {
 		position: absolute;
 		top: 90%;
