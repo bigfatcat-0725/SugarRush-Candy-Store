@@ -1,7 +1,10 @@
 <script>
 	import { slide } from 'svelte/transition'
+
 	let email,
 		password = ''
+
+	const logIn = () => {}
 
 	let forgot = false
 	const forgotToggle = () => {
@@ -582,7 +585,7 @@
 	</div>
 	<span on:click="{forgotToggle}" class="Forgot-Password"> Forgot Password? </span>
 
-	<a href="/home">
+	<a on:click="{logIn}" href="/home">
 		<div class="Rectangle-2">
 			<span class="login-btn"> Login </span>
 		</div>
