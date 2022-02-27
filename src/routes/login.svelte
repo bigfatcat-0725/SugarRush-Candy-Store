@@ -1,22 +1,20 @@
 <script>
 	import supabase from '$lib/db'
 	import { goto } from '$app/navigation'
-	import { user } from '$lib/stores'
+	import { user, email, password } from '$lib/stores'
 	import { slide } from 'svelte/transition'
-
-	let email,
-		password = ''
+	import { fly } from 'svelte/transition'
 
 	const logIn = async () => {
 		let { user: userDetails, error } = await supabase.auth.signIn({
-			email: email,
-			password: password
+			email: $email,
+			password: $password
 		})
-
 		$user = userDetails
+		$email = ''
+		$password = ''
 
 		if ($user === null) {
-			goto('/login')
 		} else {
 			goto('/home')
 		}
@@ -33,11 +31,16 @@
 		<img class="back" src="/static/back.svg" alt="back" />
 	</a>
 
-	<img class="logo" src="/static/login-macaron.svg" alt="logo macaron" />
+	<img
+		in:fly="{{ y: -50, delay: 500, duration: 500 }}"
+		class="logo"
+		src="/static/login-macaron.svg"
+		alt="logo macaron"
+	/>
 
 	<div class="login-text">
-		<span class="Login"> Login </span>
-		<span class="Please-sign-in-to-continue"> Please sign in to continue </span>
+		<span class="Login">Login</span>
+		<span class="Please-sign-in-to-continue">Please sign in to continue</span>
 	</div>
 
 	<div class="Rectangle email">
@@ -45,7 +48,7 @@
 			<img src="/static/email.svg" alt="email" />
 		</div>
 		<div class="content">
-			<input bind:value="{email}" required placeholder="Email" type="email" />
+			<input bind:value="{$email}" required placeholder="Email" type="email" />
 		</div>
 	</div>
 
@@ -54,7 +57,7 @@
 			<img src="/static/lock.svg" alt="lock" />
 		</div>
 		<div class="content">
-			<input bind:value="{password}" required placeholder="Password" type="password" />
+			<input bind:value="{$password}" required placeholder="Password" type="password" />
 		</div>
 	</div>
 
@@ -91,7 +94,7 @@
 				<img src="/static/email.svg" alt="email" />
 			</div>
 			<div class="content">
-				<input bind:value="{email}" required placeholder="Email" type="email" />
+				<input bind:value="{$email}" required placeholder="Email" type="text" />
 			</div>
 		</div>
 		<div class="forgot-Rectangle-2">
@@ -189,6 +192,7 @@
 		text-align: left;
 		color: #666;
 	}
+
 	.Forgot-Password {
 		position: absolute;
 		top: 56%;
@@ -268,9 +272,10 @@
 		z-index: 1;
 	}
 
+	/* forgot */
 	.forgot {
-		width: 375px;
-		height: 386px;
+		width: 23.5rem;
+		height: 24.2rem;
 		padding: 53px 16px 68px;
 		border-radius: 30px 30px 0px 0px;
 		background-color: #fff;
@@ -286,6 +291,7 @@
 		font-weight: bold;
 		text-align: left;
 		color: #000;
+		text-decoration: line-through;
 	}
 	.Enter-your-email-for-the-verification-process-we-will-send-4-digit-code-to-your-registered-email {
 		margin: 17px 0 0;
@@ -330,6 +336,7 @@
 		font-size: 18px;
 		font-weight: 600;
 		color: #fff;
+		text-decoration: line-through;
 	}
 
 	.cancel {

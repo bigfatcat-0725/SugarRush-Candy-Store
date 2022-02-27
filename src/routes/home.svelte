@@ -1,16 +1,24 @@
 <script>
-	import { goto } from '$app/navigation'
-
-	import supabase from '$lib/db'
+	import Nav from '$lib/components/Nav.svelte'
 	import { user } from '$lib/stores'
 
-	const logOut = async () => {
-		let { error } = await supabase.auth.signOut()
-		goto('/')
-	}
+	let notLogin = false
 
-	console.log($user)
+	$: if (!$user) notLogin = true
 </script>
 
-<h4>Welcome {$user?.email ? $user.email : ''}!</h4>
-<button on:click="{logOut}">로그아웃</button>
+<!-- <h4>Welcome {$user?.email ? $user.email : ''}!</h4>
+	<button on:click="{logout}">로그아웃</button> -->
+
+<div class="home">
+	<Nav notLogin="{notLogin}" />
+</div>
+
+<style>
+	.home {
+		width: 100%;
+		height: 100vh;
+		position: relative;
+		background-color: #fefefe;
+	}
+</style>

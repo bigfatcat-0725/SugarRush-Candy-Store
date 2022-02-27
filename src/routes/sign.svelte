@@ -1,22 +1,20 @@
 <script>
 	import supabase from '$lib/db'
-	import { user } from '$lib/stores'
+	import { user, email, password, confirmPassword } from '$lib/stores'
 	import { goto } from '$app/navigation'
 
-	let email,
-		password,
-		confirmPassword = ''
-
 	let error = false
-	let lengthError = false
 
 	const signUp = async () => {
-		if (password === confirmPassword) {
+		if ($password === $confirmPassword) {
 			let { user: userDetails, error } = await supabase.auth.signUp({
-				email: email,
-				password: password
+				email: $email,
+				password: $password
 			})
 			$user = userDetails
+			$email = ''
+			$password = ''
+
 			goto('/home')
 		} else {
 			error = true
@@ -37,7 +35,7 @@
 				<img src="/static/email.svg" alt="email" />
 			</div>
 			<div class="content">
-				<input bind:value="{email}" required placeholder="Email" type="email" />
+				<input bind:value="{$email}" required placeholder="Email" type="email" />
 			</div>
 		</div>
 		<div class="Rectangle password">
@@ -45,7 +43,7 @@
 				<img src="/static/lock.svg" alt="lock" />
 			</div>
 			<div class="content">
-				<input bind:value="{password}" required placeholder="Password" type="password" />
+				<input bind:value="{$password}" required placeholder="Password" type="password" />
 			</div>
 		</div>
 		<div class="Rectangle confirm">
@@ -54,7 +52,7 @@
 			</div>
 			<div class="content">
 				<input
-					bind:value="{confirmPassword}"
+					bind:value="{$confirmPassword}"
 					required
 					placeholder="Confirm Password"
 					type="password"
@@ -78,9 +76,6 @@
 
 	{#if error}
 		<div class="error">Please check the password.</div>
-	{/if}
-	{#if lengthError}
-		<div class="error">password length error</div>
 	{/if}
 </div>
 
@@ -126,7 +121,7 @@
 		position: absolute;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 21rem;
+		width: 20rem;
 		height: 3rem;
 		border-radius: 0.5rem;
 		background-color: #494949;
@@ -159,7 +154,7 @@
 		font-size: 16px;
 		color: #fff;
 		background-color: transparent;
-		width: 286px;
+		width: 16rem;
 		padding: 5px 8px;
 	}
 	input::placeholder {
@@ -223,16 +218,6 @@
 		color: #c46969;
 	}
 
-	.line {
-		width: 250px;
-		height: 1px;
-		background-color: gray;
-		position: absolute;
-		top: 93%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 1;
-	}
 	.Or-connect-with {
 		position: absolute;
 		top: 90%;

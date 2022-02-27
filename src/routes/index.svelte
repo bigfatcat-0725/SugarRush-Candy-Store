@@ -1,24 +1,27 @@
+<script>
+</script>
+
 <div class="intro">
 	<img class="logo" src="/static/intro-macaron.svg" alt="logo macaron" />
 
 	<div class="logo-text">
-		<p class="Welcome">Welcome</p>
-		<p class="CRAVING-SUGAR">CRAVING SUGAR?</p>
-		<p class="Create-an-account-and-enjoy-the-sugar-rush">
+		<p class="logo-text-1">Welcome</p>
+		<p class="logo-text-2">CRAVING SUGAR?</p>
+		<p class="logo-text-3">
 			Create an account<br />
 			enjoy the sugar rush!
 		</p>
 	</div>
 
-	<a href="/sign">
+	<a href="/login">
 		<div class="btn-start">
-			<span class="Getting-Started">Getting Started</span>
+			<span class="btn-start-text">Getting Started</span>
 		</div>
 	</a>
 
-	<div class="already">
-		<span class="Already-have-an-account"> Already have an account? </span>
-		<span class="Login"><a href="/login">Login</a></span>
+	<div class="create">
+		<span class="create-account">Create a new account?</span>
+		<span class="go"><a href="/sign">GO</a></span>
 	</div>
 </div>
 
@@ -29,6 +32,8 @@
 		position: relative;
 		background-color: #ff748c;
 	}
+
+	/* logo macaron */
 	.logo {
 		position: absolute;
 		top: 30%;
@@ -38,27 +43,28 @@
 		height: 25rem;
 	}
 
+	/* logo-text */
 	.logo-text {
 		position: absolute;
-		top: 65%;
+		top: 62%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	.logo-text .Welcome {
+	.logo-text-1 {
 		font-family: 'Raleway', sans-serif;
 		font-size: 2rem;
 		font-weight: 600;
 		text-align: center;
 		color: #fff;
 	}
-	.logo-text .CRAVING-SUGAR {
+	.logo-text-2 {
 		font-family: 'Raleway', sans-serif;
 		font-size: 1rem;
 		font-weight: 600;
 		text-align: center;
 		color: #fff;
 	}
-	.logo-text .Create-an-account-and-enjoy-the-sugar-rush {
+	.logo-text-3 {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 0.9rem;
 		text-align: center;
@@ -66,9 +72,10 @@
 		word-break: keep-all;
 	}
 
+	/* btn-start */
 	.btn-start {
 		position: absolute;
-		top: 80%;
+		top: 77%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 16rem;
@@ -76,7 +83,7 @@
 		border-radius: 100px;
 		background-color: #f19d9d;
 	}
-	.btn-start .Getting-Started {
+	.btn-start .btn-start-text {
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -88,21 +95,22 @@
 		color: #fff;
 	}
 
-	.already {
+	/* create */
+	.create {
 		position: absolute;
-		top: 87%;
+		top: 84%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 100%;
 		text-align: center;
 	}
-	.already .Already-have-an-account {
+	.create-account {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 0.9rem;
 		text-align: center;
 		color: #fff;
 	}
-	.already .Login {
+	.go {
 		font-family: 'Open Sans', sans-serif;
 		font-size: 1rem;
 		font-weight: 800;
