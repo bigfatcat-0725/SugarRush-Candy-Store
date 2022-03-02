@@ -3,7 +3,6 @@
 	import { goto } from '$app/navigation'
 	import { user, email, password } from '$lib/stores'
 	import { slide } from 'svelte/transition'
-	import { fly } from 'svelte/transition'
 
 	const logIn = async () => {
 		let { user: userDetails, error } = await supabase.auth.signIn({
@@ -31,12 +30,7 @@
 		<img class="back" src="/static/back.svg" alt="back" />
 	</a>
 
-	<img
-		in:fly="{{ y: -50, delay: 500, duration: 500 }}"
-		class="logo"
-		src="/static/login-macaron.svg"
-		alt="logo macaron"
-	/>
+	<img class="logo" src="/static/login-macaron.svg" alt="logo macaron" />
 
 	<div class="login-text">
 		<span class="Login">Login</span>
