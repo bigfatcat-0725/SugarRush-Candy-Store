@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation'
 	import supabase from '$lib/db'
 	import { user } from '$lib/stores'
-	import SideBar from './SideBar.svelte'
 
 	// export let notLogin
 
